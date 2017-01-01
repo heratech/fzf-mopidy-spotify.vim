@@ -6,6 +6,8 @@
 function! s:MpcAdd(line)
     let l:file = split(a:line)[0]
     silent execute "!mpc add " . l:file
+    silent execute "!mpc play $(mpc playlist | wc -l)"
+    execute ':redraw!'
 endfunction
 
 function! s:MpcLoadPlaylist(list)
