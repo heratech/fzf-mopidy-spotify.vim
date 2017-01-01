@@ -3,31 +3,45 @@
 " Version:  0.1
 " License:  BSD 2-clause
 
+function! OutHandler(job, message)
+endfunction
+
+function! ExitHandler(job, status)
+
+endfunction
+
 function! s:MpcAdd(line)
     let l:file = split(a:line)[0]
-    silent execute "!mpc add " . l:file
-    silent execute "!mpc play $(mpc playlist | wc -l)"
+    silent execute "!mpc add " . l:file . " > /dev/null &"
+    silent execute "!mpc play $(mpc playlist | wc -l)" . " > /dev/null &"
     execute ':redraw!'
+"    let cmd = "mpc add" . l:file
+"    let job = job_start(cmd, {'out_io': 'buffer', 'out_name': 'make_buffer', 'out_cb': 'OutHandler', 'exit_cb': 'ExitHandler'})
 endfunction
 
 function! s:MpcLoadPlaylist(list)
-    silent execute "!mpc clear && mpc load " . a:list . " && mpc play > /dev/null"
+    silent execute "!mpc clear && mpc load " . a:list . " && mpc play > /dev/null &"
+    execute ':redraw!'
 endfunction
 
 function! s:MpcPlay()
-    silent execute "!mpc play > /dev/null"
+    silent execute "!mpc play > /dev/null &"
+    execute ':redraw!'
 endfunction
 
 function! s:MpcPause()
-    silent execute "!mpc pause > /dev/null"
+    silent execute "!mpc pause > /dev/null &"
+    execute ':redraw!'
 endfunction
 
 function! s:MpcNext()
-    silent execute "!mpc next > /dev/null"
+    silent execute "!mpc next > /dev/null &"
+    execute ':redraw!'
 endfunction
 
 function! s:MpcPrev()
-    silent execute "!mpc prev > /dev/null"
+    silent execute "!mpc prev > /dev/null &"
+    execute ':redraw!'
 endfunction
 
 function! s:Song(title)
