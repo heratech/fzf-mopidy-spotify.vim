@@ -34,7 +34,7 @@ function! s:MpcPause()
     execute ':redraw!'
 endfunction
 
-function! s:MpcwToggle()
+function! s:MpcToggle()
     silent execute "!mpc toggle > /dev/null &"
     execute ':redraw!'
 endfunction
