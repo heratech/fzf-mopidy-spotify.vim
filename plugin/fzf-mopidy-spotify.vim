@@ -34,6 +34,12 @@ function! s:MpcPause()
     execute ':redraw!'
 endfunction
 
+function! s:MpcwToggle()
+    silent execute "!mpc toggle > /dev/null &"
+    execute ':redraw!'
+endfunction
+
+
 function! s:MpcNext()
     silent execute "!mpc next > /dev/null &"
     execute ':redraw!'
@@ -86,7 +92,8 @@ command! -nargs=+ Album      call <sid>AlbumByArtist(<q-args>)
 command! -nargs=+ AlbumByTitle  call <sid>AlbumByTitle(<q-args>)
 command! -nargs=+ Playlist      call <sid>Playlist(<q-args>)
 
-command! SpotifyPlay    call <sid>MpcPlay()
-command! SpotifyPause   call <sid>MpcPause()
-command! SpotifyNext    call <sid>MpcNext()
-command! SpotifyPrev    call <sid>MpcPrev()
+command! MpcPlay    call <sid>MpcPlay()
+command! MpcPause   call <sid>MpcPause()
+command! MpcToggle   call <sid>MpcToggle()
+command! MpcNext    call <sid>MpcNext()
+command! MpcPrev    call <sid>MpcPrev()
